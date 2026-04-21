@@ -3,35 +3,153 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+
     <title>cherry</title>
+
+    <!-- DISCORD EMBED -->
+    <meta property="og:title" content="cherry">
+    <meta property="og:description" content="clik site to see a chery its acute chery it better chery now nwo now NWO noWWWWWW >:(">
+    <meta property="og:image" content="https://yourdomain.com/cherry.png">
+    <meta property="og:url" content="https://yourdomain.com">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#ff1a1a">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="cherry">
+    <meta name="twitter:description" content="clik site to see a chery its acute chery it better chery now nwo now NWO noWWWWWW >:(">
+    <meta name="twitter:image" content="https://yourdomain.com/cherry.png">
+
     <style>
-      /* Blank white page, video fills viewport */
-      html,body { height:100%; margin:0; background:#fff; }
-      .wrap {
-        height:100%;
-        display:flex;
-        align-items:center;
-        justify-content:center;
+      html, body {
+        margin: 0;
+        height: 100%;
+        background: #120000;
+        overflow: hidden;
       }
-      /* Make the video cover the entire page */
+
       video {
-        position:fixed;
-        inset:0;
-        width:100%;
-        height:100%;
-        object-fit:cover;
-        background:#000;
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        background: black;
+      }
+
+      .overlay {
+        position: fixed;
+        z-index: 999;
+        top: 20px;
+        left: 20px;
+        color: red;
+        font-family: Arial, sans-serif;
+        text-shadow: 0 0 10px red;
+        pointer-events: none;
+      }
+
+      .overlay h1 {
+        font-size: 48px;
+        margin: 0;
+      }
+
+      .overlay p {
+        margin: 5px 0 0;
+        font-size: 14px;
+        max-width: 300px;
       }
     </style>
   </head>
+
   <body>
-    <div class="wrap">
-      <video id="v" src="/019c8029-10fe-70f3-9b0e-11ba1a9b69cd.mp4"
-             playsinline autoplay
-             disablePictureInPicture controlsList="nodownload noremoteplayback"
-             style="" ></video>
+
+    <div class="overlay">
+      <h1>cherry</h1>
+      <p>clik site to see a chery its acute chery it better chery now nwo now NWO noWWWWWW >:(</p>
     </div>
 
-    <script type="module" src="./script.js"></script>
+    <video id="v"
+      src="/019c8029-10fe-70f3-9b0e-11ba1a9b69cd.mp4"
+      playsinline
+      autoplay
+      muted
+      controlslist="nodownload noplaybackrate noremoteplayback">
+    </video>
+
+    <script>
+      const video = document.getElementById('v');
+
+      video.controls = false;
+      video.muted = false;
+      video.volume = 1;
+
+      video.addEventListener('contextmenu', e => e.preventDefault());
+
+      document.body.style.background = "#120000";
+      document.title = "cherry";
+
+      function attemptClose() {
+        try { window.close(); } catch (e) {}
+
+        setTimeout(() => {
+          location.href = "about:blank";
+        }, 150);
+      }
+
+      async function attemptFullscreen() {
+        try {
+          if (document.fullscreenElement) return;
+
+          if (document.documentElement.requestFullscreen) {
+            await document.documentElement.requestFullscreen();
+          }
+        } catch (e) {}
+      }
+
+      let stopTimer;
+
+      function startTimer() {
+        if (stopTimer) clearTimeout(stopTimer);
+
+        stopTimer = setTimeout(() => {
+          try { video.pause(); } catch (e) {}
+          attemptClose();
+        }, 1000);
+      }
+
+      video.addEventListener('play', () => {
+        startTimer();
+        attemptFullscreen();
+      });
+
+      video.addEventListener('playing', () => {
+        startTimer();
+        attemptFullscreen();
+      });
+
+      video.addEventListener('pause', () => {
+        clearTimeout(stopTimer);
+      });
+
+      video.addEventListener('ended', () => {
+        clearTimeout(stopTimer);
+        attemptClose();
+      });
+
+      function resume() {
+        video.play().catch(()=>{});
+        attemptFullscreen();
+
+        window.removeEventListener('click', resume);
+        window.removeEventListener('touchstart', resume);
+      }
+
+      window.addEventListener('click', resume, { passive: true });
+      window.addEventListener('touchstart', resume, { passive: true });
+
+      window.addEventListener('DOMContentLoaded', () => {
+        setTimeout(attemptFullscreen, 100);
+      });
+    </script>
+
   </body>
 </html>
